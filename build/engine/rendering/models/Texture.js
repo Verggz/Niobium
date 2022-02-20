@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Texture = void 0;
+class Texture {
+    constructor(gl, source) {
+        this.gl = gl;
+        this.textureSource = source;
+        this.texture = this.gl.createTexture();
+        this.gl.bindTexture(this.gl.TEXTURE_2D, this.texture);
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
+        this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+        var image = new Image();
+        var main = this;
+        image.onload = function () {
+            main.gl.bindTexture(main.gl.TEXTURE_2D, main.texture);
+            main.gl.texParameteri(main.gl.TEXTURE_2D, main.gl.TEXTURE_WRAP_S, main.gl.CLAMP_TO_EDGE);
+            main.gl.texParameteri(main.gl.TEXTURE_2D, main.gl.TEXTURE_WRAP_T, main.gl.CLAMP_TO_EDGE);
+            main.gl.texParameteri(main.gl.TEXTURE_2D, main.gl.TEXTURE_MIN_FILTER, main.gl.NEAREST);
+            main.gl.texParameteri(main.gl.TEXTURE_2D, main.gl.TEXTURE_MAG_FILTER, main.gl.NEAREST);
+            main.gl.texImage2D(main.gl.TEXTURE_2D, 0, main.gl.RGBA, main.gl.RGBA, main.gl.UNSIGNED_BYTE, image);
+        };
+        image.src = this.textureSource;
+    }
+    bind(sampler) {
+        if (sampler >= 0 && sampler <= 31) {
+            this.gl.activeTexture(this.gl.TEXTURE0);
+            this.gl.bindTexture(this.gl.TEXTURE_2D, this.texture);
+        }
+    }
+    static isPowerOf2(val) {
+        return (val & (val - 1)) == 0;
+    }
+}
+exports.Texture = Texture;

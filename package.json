@@ -1,0 +1,21 @@
+{
+  "name": "niobium",
+  "version": "1.0.0",
+  "description": "webgl based 2d rendering engine",
+  "main": "main.js",
+  "scripts": {
+    "start": "tsc && electron ./build/main.js"
+  },
+  "keywords": [
+    "rendering"
+  ],
+  "author": "penguindetox",
+  "license": "ISC",
+  "dependencies": {
+    "@electron/remote": "^2.0.4",
+    "electron": "^16.0.8"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.13"
+  }
+}
