@@ -20,7 +20,7 @@ export class Transform{
     }
 
     public addPosition(x:number,y:number){
-        this.position.set(this.position.v[0] + x / NioRenderer.SCALE_SIZE,this.position.v[1] + y / NioRenderer.SCALE_SIZE);
+        this.position.set(this.position.x() + x / NioRenderer.SCALE_SIZE,this.position.y() + y / NioRenderer.SCALE_SIZE);
     }
 
     public GetTransform():Matrix3f{

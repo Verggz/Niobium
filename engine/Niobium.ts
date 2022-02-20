@@ -3,6 +3,7 @@ import { View } from "./rendering/area/View.js";
 import { Entity } from "./model/Entity.js";
 import { Keyboard } from "./input/Keyboard.js";
 import { Vector2f } from "./math/Vector2f.js";
+import { Mouse } from "./input/Mouse.js";
 
 const fpselement = document.querySelector("#fpscounter");
 
@@ -12,6 +13,8 @@ class Niobium{
 
     public entities: Entity[];
     public view: View;
+
+    public mouse:Mouse;
     public keyboard:Keyboard;
 
     private prevTime:number = 0;
@@ -28,11 +31,9 @@ class Niobium{
     }
 
     public init(){
-        this.entities = [new Entity(this.gl,this.view,50,50,`${__dirname}/../assets/test2.png`),new Entity(this.gl,this.view,1000,0),new Entity(this.gl,this.view,-100,0)];
-        for(var i = 0; i < 10000; i++){
-            this.entities.push(new Entity(this.gl,this.view,Math.random() * 2000,Math.random() * 2000))
-        }
-        this.keyboard = new Keyboard();
+        this.entities = [new Entity(this.gl,this.view,0,0,`${__dirname}/../assets/test2.png`),new Entity(this.gl,this.view,640,360),new Entity(this.gl,this.view,-100,0)];
+        this.keyboard = new Keyboard(); 
+        this.mouse = new Mouse();
     }
 
     public updateScreen(){
@@ -49,6 +50,7 @@ class Niobium{
 
     public run(){
         this.keyboard.update(window);
+        this.mouse.update(this.canvas);
         this.update(0);
     }
 
@@ -62,6 +64,12 @@ class Niobium{
             this.entities[0].transform.addPosition(0,100 * deltaTime);
         }
 
+        if(this.mouse.buttons[0] == true){
+            this.entities[0].transform.setPosition(this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y());
+        }
+
+        console.log(`x: ${this.mouse.screenToView(this.view).x()} y: ${this.mouse.screenToView(this.view).y()}`);
+
         if(this.keyboard.isKeyDown("a") == true){
             this.entities[0].transform.addPosition(100 * deltaTime,0);
         }
@@ -72,7 +80,7 @@ class Niobium{
             this.entities[0].transform.addPosition(-100 * deltaTime,0);
         }
 
-        this.view.followEntity(this.entities[0])
+        //this.view.followEntity(this.entities[0])
 
         if(this.keyboard.isKeyDown("l") == true){
             this.view.pos.v[0] += -50 * deltaTime;
@@ -93,8 +101,10 @@ class Niobium{
         for(var i = 0; i < this.entities.length; i++){
             if(Vector2f.distance(this.view.pos,this.entities[i].transform.position.scale(NioRenderer.SCALE_SIZE,NioRenderer.SCALE_SIZE)) < NioRenderer.POPIN_DISTANCE){
                 this.entities[i].draw();
-            }
 
+               
+            }
+            //this.entities[i].draw();
            //this.entities[i].draw();
             //if()
             

@@ -21,7 +21,6 @@ class Model {
         shader.setUniformMatrix3("model", transform.GetTransform());
         shader.setUniform1i("sampler", 0);
         texture.bind(0);
-        //shader.setUniformMatrix3("view",new Matrix3f(MATRIX_TYPE.IDENTITY));
         this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices.length / 2);
         this.vao.unbind();
     }

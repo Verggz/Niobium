@@ -15,7 +15,7 @@ export class View{
     constructor(width:number,height:number){
         this.width = width;
         this.height = height;
-        this.setPosition(0,0);
+        this.setPosition(1000,0);
         console.log(this.pos)
 
         this.view = Matrix3f.SetProjection(this.width,this.height);

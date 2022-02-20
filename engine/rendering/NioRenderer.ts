@@ -17,7 +17,7 @@ export class NioRenderer{
 
     public static SCALE_SIZE:number = 32;
     //the distance at which an object stops rendering from the cameras
-    public static POPIN_DISTANCE:number = 500;
+    public static POPIN_DISTANCE:number = 5000;
 
     constructor(gl:WebGL2RenderingContext,mainview:View,vertices:number[],texcoords:number[],textureSrc:string){
         this.gl = gl;

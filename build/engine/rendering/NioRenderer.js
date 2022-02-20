@@ -21,4 +21,4 @@ class NioRenderer {
 exports.NioRenderer = NioRenderer;
 NioRenderer.SCALE_SIZE = 32;
 //the distance at which an object stops rendering from the cameras
-NioRenderer.POPIN_DISTANCE = 500;
+NioRenderer.POPIN_DISTANCE = 5000;

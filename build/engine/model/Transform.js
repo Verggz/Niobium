@@ -16,7 +16,7 @@ class Transform {
         this.position.set(x / NioRenderer_1.NioRenderer.SCALE_SIZE, y / NioRenderer_1.NioRenderer.SCALE_SIZE);
     }
     addPosition(x, y) {
-        this.position.set(this.position.v[0] + x / NioRenderer_1.NioRenderer.SCALE_SIZE, this.position.v[1] + y / NioRenderer_1.NioRenderer.SCALE_SIZE);
+        this.position.set(this.position.x() + x / NioRenderer_1.NioRenderer.SCALE_SIZE, this.position.y() + y / NioRenderer_1.NioRenderer.SCALE_SIZE);
     }
     GetTransform() {
         var target = Matrix3f_1.Matrix3f.setTranslation(this.position);

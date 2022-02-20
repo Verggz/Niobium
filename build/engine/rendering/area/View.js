@@ -14,7 +14,7 @@ class View {
         this.view = new Matrix3f_1.Matrix3f(Matrix3f_1.MATRIX_TYPE.IDENTITY);
         this.width = width;
         this.height = height;
-        this.setPosition(0, 0);
+        this.setPosition(1000, 0);
         console.log(this.pos);
         this.view = Matrix3f_1.Matrix3f.SetProjection(this.width, this.height);
         //this.SCALE_FACTOR = this.height * 0.5;
