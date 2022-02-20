@@ -32,8 +32,12 @@ export class Model{
         this.vao.bind();
 
         shader.bind();
+        
         shader.setUniformMatrix3("view",view.getView());
         shader.setUniformMatrix3("model",transform.GetTransform());
+        shader.setUniformMatrix3("projection",view.getProjection());
+        shader.setUniformMatrix3("scale",view.getScale());
+
         shader.setUniform1i("sampler",0);
 
         texture.bind(0);

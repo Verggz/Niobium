@@ -19,6 +19,8 @@ class Model {
         shader.bind();
         shader.setUniformMatrix3("view", view.getView());
         shader.setUniformMatrix3("model", transform.GetTransform());
+        shader.setUniformMatrix3("projection", view.getProjection());
+        shader.setUniformMatrix3("scale", view.getScale());
         shader.setUniform1i("sampler", 0);
         texture.bind(0);
         this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertices.length / 2);

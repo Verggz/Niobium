@@ -60,27 +60,31 @@ class Niobium{
         this.gl.clearColor(0,0,0,1);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
-        if(this.keyboard.isKeyDown("w") == true){
-            this.entities[0].transform.addPosition(0,100 * deltaTime);
-        }
+
 
         if(this.mouse.buttons[0] == true){
+            //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
             this.entities[0].transform.setPosition(this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y());
-        }
+            console.log( this.entities[0].transform.position.x() * 32 );
+            console.log( this.entities[0].transform.position.y() * 32 );
 
-        console.log(`x: ${this.mouse.screenToView(this.view).x()} y: ${this.mouse.screenToView(this.view).y()}`);
-
-        if(this.keyboard.isKeyDown("a") == true){
-            this.entities[0].transform.addPosition(100 * deltaTime,0);
         }
-        if(this.keyboard.isKeyDown("s") == true){
+        //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
+        //console.log(`x: ${this.mouse.screenToView(this.view).x()} y: ${this.mouse.screenToView(this.view).y()}`);
+        if(this.keyboard.isKeyDown("w") == true){
             this.entities[0].transform.addPosition(0,-100 * deltaTime);
         }
-        if(this.keyboard.isKeyDown("d") == true){
+        if(this.keyboard.isKeyDown("a") == true){
             this.entities[0].transform.addPosition(-100 * deltaTime,0);
         }
+        if(this.keyboard.isKeyDown("s") == true){
+            this.entities[0].transform.addPosition(0,100 * deltaTime);
+        }
+        if(this.keyboard.isKeyDown("d") == true){
+            this.entities[0].transform.addPosition(100 * deltaTime,0);
+        }
 
-        //this.view.followEntity(this.entities[0])
+        this.view.followEntity(this.entities[0])
 
         if(this.keyboard.isKeyDown("l") == true){
             this.view.pos.v[0] += -50 * deltaTime;
@@ -99,7 +103,7 @@ class Niobium{
         }
 
         for(var i = 0; i < this.entities.length; i++){
-            if(Vector2f.distance(this.view.pos,this.entities[i].transform.position.scale(NioRenderer.SCALE_SIZE,NioRenderer.SCALE_SIZE)) < NioRenderer.POPIN_DISTANCE){
+            if(Vector2f.distance(this.view.pos,this.entities[i].transform.position) < NioRenderer.POPIN_DISTANCE){
                 this.entities[i].draw();
 
                

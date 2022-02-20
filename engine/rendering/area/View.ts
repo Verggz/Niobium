@@ -15,7 +15,7 @@ export class View{
     constructor(width:number,height:number){
         this.width = width;
         this.height = height;
-        this.setPosition(1000,0);
+        this.setPosition(0,0);
         console.log(this.pos)
 
         this.view = Matrix3f.SetProjection(this.width,this.height);
@@ -55,7 +55,7 @@ export class View{
 
     public followEntity(entity:Entity){
         //multiplied by the scale size to make the entity position relative to the view 
-        this.setPosition(entity.transform.position.v[0] * NioRenderer.SCALE_SIZE,entity.transform.position.v[1] * NioRenderer.SCALE_SIZE);
+        this.setPosition(-entity.transform.position.x(),-entity.transform.position.y());
     }
 
     public lerpToPos(pos:Vector2f){
@@ -63,15 +63,27 @@ export class View{
         this.pos.v[1] = ((1 - 0.1) * this.pos.v[1] + 0.1 + pos.v[1]);
     }
 
-    public getView():Matrix3f{
-        var target = new Matrix3f(MATRIX_TYPE.IDENTITY);
-        var translation =  Matrix3f.setTranslation(this.pos).scale(new Vector2f(new Float32Array([-NioRenderer.SCALE_SIZE,-NioRenderer.SCALE_SIZE])));
-        target = target.mul(this.view);
+    public getProjection(){
+        return this.view;
+    }
 
-        target = target.mul(translation);
+    public getScale(){
+        return Matrix3f.setScale(new Vector2f(new Float32Array([NioRenderer.SCALE_SIZE,NioRenderer.SCALE_SIZE])))
+    }
 
-        
+    //public getView(transf:Matrix3f):Matrix3f{
+    //    var target = new Matrix3f(MATRIX_TYPE.IDENTITY);
+    //    var translation =  Matrix3f.mul(Matrix3f.setTranslation(this.pos),transf).scale(new Vector2f(new Float32Array([-NioRenderer.SCALE_SIZE,-NioRenderer.SCALE_SIZE])));
+    //    target = target.mul(this.view);
+//
+    //    target = target.mul(translation);
+//
+    //    
+//
+    //    return target;
+    //}
 
-        return target;
+    public getView(){
+        return Matrix3f.setTranslation(this.pos);
     }
 }

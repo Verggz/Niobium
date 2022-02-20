@@ -7,7 +7,7 @@ export class Transform{
     public rotation:number;
 
     constructor(x:number,y:number){
-        this.position = new Vector2f(new Float32Array([x / NioRenderer.SCALE_SIZE,y / NioRenderer.SCALE_SIZE]));
+        this.position = new Vector2f(new Float32Array([x,y ]));
         this.rotation = 0;
     }
 
@@ -16,11 +16,11 @@ export class Transform{
     }
 
     public setPosition(x:number,y:number){
-        this.position.set(x/ NioRenderer.SCALE_SIZE,y / NioRenderer.SCALE_SIZE);
+        this.position.set(x,y );
     }
 
     public addPosition(x:number,y:number){
-        this.position.set(this.position.x() + x / NioRenderer.SCALE_SIZE,this.position.y() + y / NioRenderer.SCALE_SIZE);
+        this.position.set(this.position.x() + x,this.position.y() + y );
     }
 
     public GetTransform():Matrix3f{

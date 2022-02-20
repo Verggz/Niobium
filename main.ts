@@ -10,8 +10,8 @@ function createWindow(){
             contextIsolation: false,
             webgl:true,
         },
-        width:1280,
-        height:720,
+        width:1920,
+        height:1080,
         title:"Niobium 0.0.1"
         
     });

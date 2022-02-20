@@ -24,14 +24,21 @@ class Mouse {
     }
     mouseMove(e) {
         //console.log(`${e.clientX - 10} | ${e.clientY - 63}`);
-        this.position.set(e.clientX - 10, e.clientY - 63);
+        this.position.set(e.offsetX, e.offsetY);
+        //console.log(e)
         //console.log(this.position)
     }
     screenToView(view) {
         var target = new Vector2f_1.Vector2f(null);
         target.set((view.width / 2 + view.pos.x()) - this.position.x(), (view.height / 2 + view.pos.y()) - this.position.y());
-        ``;
+        console.log(`target: x: ${target.x()} y: ${target.y()}\nmouse pos: x: ${this.position.x()} y: ${this.position.y()}\nview pos: x: ${view.pos.x()} y: ${view.pos.y()}\nview size: x: ${view.width / 2} y: ${view.height / 2}\n`);
+        //console.log("x", this.position.x());
+        //console.log("y", this.position.y());
         return target;
+    }
+    getMouseButtonDown(button) {
+    }
+    getMouseButtonUp(button) {
     }
 }
 exports.Mouse = Mouse;
