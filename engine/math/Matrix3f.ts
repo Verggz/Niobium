@@ -100,6 +100,39 @@ export class Matrix3f{
 
         return target;
     }
+    
+    public static SetRotation(degrees:number):Matrix3f{
+        var radians = Matrix3f.degreesToRadians(degrees);
+        var target = new Matrix3f(MATRIX_TYPE.IDENTITY);
+
+        var cos =  Math.cos(radians);
+        var sin = Math.sin(radians);
+
+        target.m[Matrix3f.m00] = cos
+        target.m[Matrix3f.m01] = sin
+
+        target.m[Matrix3f.m10] = -sin;
+        target.m[Matrix3f.m11] = cos;
+
+        return target;
+    }
+
+    public rotate(degrees:number){
+        var target = new Matrix3f(MATRIX_TYPE.IDENTITY);
+        var rotatemat = Matrix3f.SetRotation(degrees);
+        
+        target = Matrix3f.mul(this,rotatemat);
+
+        return target;
+    }
+
+    public static radiansToDegrees(radians:number):number{
+        return radians *  180 / Math.PI;
+    }
+
+    public static degreesToRadians(degrees:number):number{
+        return degrees * Math.PI/180;
+    }
 
 
 

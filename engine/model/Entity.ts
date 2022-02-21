@@ -14,12 +14,12 @@ export class Entity{
     constructor(gl:WebGL2RenderingContext,view:View,x:number,y:number,textureSrc:string = `${__dirname}/../../assets/test.jpeg`){
         this.transform = new Transform(x,y);
         this.renderer = new NioRenderer(gl,view,[-1,1,-1,-1,1,-1,1,-1,1,1,-1,1],[
-            0,0,
-            0,1,
-            1,1
-            ,1,1
-            ,1,0,
-            0,0],textureSrc);
+            1,1,
+            1,0,
+            0,0
+            ,0,0
+            ,0,1,
+            1,1],textureSrc);
         this.components = [];
         this.blueprint = new Blueprint();
     }

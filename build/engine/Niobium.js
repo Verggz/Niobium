@@ -18,7 +18,7 @@ class Niobium {
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     }
     init() {
-        this.entities = [new Entity_js_1.Entity(this.gl, this.view, 0, 0, `${__dirname}/../assets/test2.png`), new Entity_js_1.Entity(this.gl, this.view, 640, 360), new Entity_js_1.Entity(this.gl, this.view, -100, 0)];
+        this.entities = [new Entity_js_1.Entity(this.gl, this.view, 0, 0, `${__dirname}/../assets/test2.png`), new Entity_js_1.Entity(this.gl, this.view, -640, -360), new Entity_js_1.Entity(this.gl, this.view, -100, 0)];
         this.keyboard = new Keyboard_js_1.Keyboard();
         this.mouse = new Mouse_js_1.Mouse();
     }
@@ -40,12 +40,13 @@ class Niobium {
         var deltaTime = (time - this.prevTime) * 0.001;
         this.gl.clearColor(0, 0, 0, 1);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
-        if (this.mouse.buttons[0] == true) {
-            //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
-            this.entities[0].transform.setPosition(this.mouse.screenToView(this.view).x(), this.mouse.screenToView(this.view).y());
-            console.log(this.entities[0].transform.position.x() * 32);
-            console.log(this.entities[0].transform.position.y() * 32);
-        }
+        //if(this.mouse.buttons[0] == true){
+        //    //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
+        //    this.entities[0].transform.setPosition(this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y());
+        //    console.log( this.entities[0].transform.position.x());
+        //    console.log( this.entities[0].transform.position.y() );
+        //
+        //}
         //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
         //console.log(`x: ${this.mouse.screenToView(this.view).x()} y: ${this.mouse.screenToView(this.view).y()}`);
         if (this.keyboard.isKeyDown("w") == true) {
@@ -88,5 +89,5 @@ class Niobium {
 }
 var niobium = new Niobium();
 niobium.init();
-window.addEventListener("resize", niobium.updateScreen.bind(niobium));
+//window.addEventListener("resize",niobium.updateScreen.bind(niobium));
 niobium.run();

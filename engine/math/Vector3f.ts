@@ -22,5 +22,17 @@ export class Vector3f{
         this.v[2] = z;
     }
 
+    public x():number{
+        return this.v[0];
+    }
+
+    public y():number{
+        return this.v[1];
+    }
+
+    public z():number{
+        return this.v[2];
+    }
+
     
 }

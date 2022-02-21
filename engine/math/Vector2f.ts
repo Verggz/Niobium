@@ -30,6 +30,13 @@ export class Vector2f{
         return this;
     }
 
+    public add(x:number,y:number):Vector2f{
+        this.v[0] += x;
+        this.v[1] += y;
+
+        return this;
+    }
+
     public static distance(v1:Vector2f,v2:Vector2f):number{
         return Math.sqrt(((v1.x() - v2.x())* (v1.x() - v2.x())) + ((v1.y() - v2.y())* (v1.y() - v2.y())));
     }

@@ -24,7 +24,7 @@ export class Transform{
     }
 
     public GetTransform():Matrix3f{
-        var target = Matrix3f.setTranslation(this.position);
+        var target = Matrix3f.setTranslation(this.position).rotate(this.rotation).scale(new Vector2f(new Float32Array([2,2])));
 
         return target;
     }

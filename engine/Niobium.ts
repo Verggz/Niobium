@@ -31,7 +31,7 @@ class Niobium{
     }
 
     public init(){
-        this.entities = [new Entity(this.gl,this.view,0,0,`${__dirname}/../assets/test2.png`),new Entity(this.gl,this.view,640,360),new Entity(this.gl,this.view,-100,0)];
+        this.entities = [new Entity(this.gl,this.view,0,0,`${__dirname}/../assets/test2.png`),new Entity(this.gl,this.view,-640,-360),new Entity(this.gl,this.view,-100,0)];
         this.keyboard = new Keyboard(); 
         this.mouse = new Mouse();
     }
@@ -62,13 +62,13 @@ class Niobium{
 
 
 
-        if(this.mouse.buttons[0] == true){
-            //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
-            this.entities[0].transform.setPosition(this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y());
-            console.log( this.entities[0].transform.position.x() * 32 );
-            console.log( this.entities[0].transform.position.y() * 32 );
-
-        }
+        //if(this.mouse.buttons[0] == true){
+        //    //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
+        //    this.entities[0].transform.setPosition(this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y());
+        //    console.log( this.entities[0].transform.position.x());
+        //    console.log( this.entities[0].transform.position.y() );
+//
+        //}
         //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
         //console.log(`x: ${this.mouse.screenToView(this.view).x()} y: ${this.mouse.screenToView(this.view).y()}`);
         if(this.keyboard.isKeyDown("w") == true){
@@ -124,7 +124,7 @@ var niobium = new Niobium();
 
 niobium.init();
 
-window.addEventListener("resize",niobium.updateScreen.bind(niobium));
+//window.addEventListener("resize",niobium.updateScreen.bind(niobium));
 
 niobium.run();
 

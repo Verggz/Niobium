@@ -18,7 +18,7 @@ class Transform {
         this.position.set(this.position.x() + x, this.position.y() + y);
     }
     GetTransform() {
-        var target = Matrix3f_1.Matrix3f.setTranslation(this.position);
+        var target = Matrix3f_1.Matrix3f.setTranslation(this.position).rotate(this.rotation).scale(new Vector2f_1.Vector2f(new Float32Array([2, 2])));
         return target;
     }
 }

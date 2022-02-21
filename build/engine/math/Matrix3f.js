@@ -65,6 +65,29 @@ class Matrix3f {
         target.m[Matrix3f.m11] = -2 / height;
         return target;
     }
+    static SetRotation(degrees) {
+        var radians = Matrix3f.degreesToRadians(degrees);
+        var target = new Matrix3f(MATRIX_TYPE.IDENTITY);
+        var cos = Math.cos(radians);
+        var sin = Math.sin(radians);
+        target.m[Matrix3f.m00] = cos;
+        target.m[Matrix3f.m01] = sin;
+        target.m[Matrix3f.m10] = -sin;
+        target.m[Matrix3f.m11] = cos;
+        return target;
+    }
+    rotate(degrees) {
+        var target = new Matrix3f(MATRIX_TYPE.IDENTITY);
+        var rotatemat = Matrix3f.SetRotation(degrees);
+        target = Matrix3f.mul(this, rotatemat);
+        return target;
+    }
+    static radiansToDegrees(radians) {
+        return radians * 180 / Math.PI;
+    }
+    static degreesToRadians(degrees) {
+        return degrees * Math.PI / 180;
+    }
     get() {
         return this.m;
     }

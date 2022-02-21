@@ -10,11 +10,12 @@ function createWindow() {
             contextIsolation: false,
             webgl: true,
         },
-        width: 1920,
-        height: 1080,
+        width: 1280,
+        height: 720,
         title: "Niobium 0.0.1"
     });
     window.loadFile("./public/index.html");
+    //window.maximize();
     //remoteMain.enable(window.webContents);
 }
 electron_1.app.whenReady().then(() => {

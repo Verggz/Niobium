@@ -2,14 +2,25 @@
 
 <html>
     <head>
+        <style>
+        .center-screen {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'"> <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
     </head>
 
     <body>
-        <h6 id="fpscounter"></h6>
-        <canvas width="1920" height="1080" id="maincanvas"></canvas>
+        <h5 id="fpscounter"></h5>
+        <canvas class="center-screen" width="1280" height="720" id="maincanvas"></canvas>
         <script>
             require("../engine/Niobium.js");
-        </script>
+        </script> 
+       
     </body>
 </html>

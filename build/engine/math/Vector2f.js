@@ -25,6 +25,11 @@ class Vector2f {
         this.v[1] = y;
         return this;
     }
+    add(x, y) {
+        this.v[0] += x;
+        this.v[1] += y;
+        return this;
+    }
     static distance(v1, v2) {
         return Math.sqrt(((v1.x() - v2.x()) * (v1.x() - v2.x())) + ((v1.y() - v2.y()) * (v1.y() - v2.y())));
     }

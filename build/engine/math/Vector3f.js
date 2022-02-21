@@ -19,5 +19,14 @@ class Vector3f {
         this.v[1] = y;
         this.v[2] = z;
     }
+    x() {
+        return this.v[0];
+    }
+    y() {
+        return this.v[1];
+    }
+    z() {
+        return this.v[2];
+    }
 }
 exports.Vector3f = Vector3f;
