@@ -8,5 +8,15 @@ class PhysicsBodyComponent extends Component_1.Component {
     }
     update(deltaTime) {
     }
+    OnCollision() {
+    }
+    OnCollisionLeft() {
+    }
+    OnCollisionRight() {
+    }
+    OnCollisionTop() {
+    }
+    OnCollisionBottom() {
+    }
 }
 exports.PhysicsBodyComponent = PhysicsBodyComponent;

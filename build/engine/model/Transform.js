@@ -6,6 +6,7 @@ const Vector2f_1 = require("../math/Vector2f");
 class Transform {
     constructor(x, y) {
         this.position = new Vector2f_1.Vector2f(new Float32Array([x, y]));
+        this.scale = new Vector2f_1.Vector2f(new Float32Array([1, 1]));
         this.rotation = 0;
     }
     setRotation(degrees) {
@@ -18,7 +19,7 @@ class Transform {
         this.position.set(this.position.x() + x, this.position.y() + y);
     }
     GetTransform() {
-        var target = Matrix3f_1.Matrix3f.setTranslation(this.position).rotate(this.rotation).scale(new Vector2f_1.Vector2f(new Float32Array([2, 2])));
+        var target = Matrix3f_1.Matrix3f.setTranslation(this.position).rotate(this.rotation).scale(this.scale);
         return target;
     }
 }

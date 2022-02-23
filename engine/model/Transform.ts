@@ -4,10 +4,12 @@ import { NioRenderer } from "../rendering/NioRenderer";
 
 export class Transform{
     public position:Vector2f;
+    public scale:Vector2f;
     public rotation:number;
 
     constructor(x:number,y:number){
-        this.position = new Vector2f(new Float32Array([x,y ]));
+        this.position = new Vector2f(new Float32Array([x,y]));
+        this.scale = new Vector2f(new Float32Array([1,1]));
         this.rotation = 0;
     }
 
@@ -24,7 +26,7 @@ export class Transform{
     }
 
     public GetTransform():Matrix3f{
-        var target = Matrix3f.setTranslation(this.position).rotate(this.rotation).scale(new Vector2f(new Float32Array([2,2])));
+        var target = Matrix3f.setTranslation(this.position).rotate(this.rotation).scale(this.scale);
 
         return target;
     }

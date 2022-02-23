@@ -9,4 +9,24 @@ export class PhysicsBodyComponent extends Component{
     public update(deltaTime: number): void {
         
     }
+
+    public OnCollision(){
+
+    }
+
+    public OnCollisionLeft(){
+        
+    }
+
+    public OnCollisionRight(){
+
+    }
+
+    public OnCollisionTop(){
+
+    }
+
+    public OnCollisionBottom(){
+        
+    }
 }
