@@ -1,19 +1,23 @@
-import { Transform } from "./Transform";
+import { TransformComponent } from "../components/TransformComponent";
 import { NioRenderer } from "../rendering/NioRenderer";
 import { View } from "../rendering/area/View";
 import { Component } from "./Component";
 import { Blueprint } from "./Blueprint";
 
 export class Entity{
-    public transform:Transform;
+    private id:number;
+    public transform:TransformComponent;
     public renderer:NioRenderer;
 
     public components: Component[];
     public blueprint:Blueprint;
+    
+    public entityScale:number = 1;
 
-    constructor(gl:WebGL2RenderingContext,view:View,x:number,y:number,textureSrc:string = `${__dirname}/../../assets/test.jpeg`){
-        this.transform = new Transform(x,y);
-        this.renderer = new NioRenderer(gl,view,[-1,1,-1,-1,1,-1,1,-1,1,1,-1,1],[
+    constructor(gl:WebGL2RenderingContext,id:number,view:View,x:number,y:number,textureSrc:string = `none`){
+        this.id = id;
+        this.transform = new TransformComponent(x,y);
+        this.renderer = new NioRenderer(gl,view,[-1 * this.entityScale,1 * this.entityScale,-1 * this.entityScale,-1 * this.entityScale,1 * this.entityScale,-1 * this.entityScale,1 * this.entityScale,-1 * this.entityScale,1 * this.entityScale,1* this.entityScale,-1 * this.entityScale,1 * this.entityScale],[
             1,1,
             1,0,
             0,0
@@ -24,12 +28,16 @@ export class Entity{
         this.blueprint = new Blueprint();
     }
 
+    public getID():number{
+        return this.id;
+    }
+
     public draw():void{
         this.renderer.render(this.transform);
     }
 
     public update(deltaTime:number){
-        this.renderer.render(this.transform);
+        //this.renderer.render(this.transform);
     }
 
 }

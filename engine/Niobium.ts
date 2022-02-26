@@ -4,6 +4,8 @@ import { Entity } from "./model/Entity.js";
 import { Keyboard } from "./input/Keyboard.js";
 import { Vector2f } from "./math/Vector2f.js";
 import { Mouse } from "./input/Mouse.js";
+import { Scene } from "./model/Scene.js";
+import { NiobiumManager } from "./NiobiumManager.js";
 
 const fpselement = document.querySelector("#fpscounter");
 
@@ -11,11 +13,6 @@ class Niobium{
     public gl: WebGL2RenderingContext;
     public canvas: HTMLCanvasElement;
 
-    public entities: Entity[];
-    public view: View;
-
-    public mouse:Mouse;
-    public keyboard:Keyboard;
 
     private prevTime:number = 0;
 
@@ -23,17 +20,16 @@ class Niobium{
         this.canvas = document.querySelector("#maincanvas") as HTMLCanvasElement;
         this.gl = this.canvas.getContext("webgl2") as WebGL2RenderingContext;
 
-        this.view = new View(this.gl.canvas.width,this.gl.canvas.height);
-
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clearColor(0,0,0,1);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     }
 
     public init(){
-        this.entities = [new Entity(this.gl,this.view,0,0,`${__dirname}/../assets/test2.png`),new Entity(this.gl,this.view,-640,-360),new Entity(this.gl,this.view,-100,0)];
-        this.keyboard = new Keyboard(); 
-        this.mouse = new Mouse();
+        new NiobiumManager(this.gl,this.gl.canvas.width,this.gl.canvas.height);
+
+        NiobiumManager.scenes.push(new Scene(this.gl,[new Entity(this.gl,0,NiobiumManager.view,0,0,`${__dirname}/../assets/test2.png`),new Entity(this.gl,0,NiobiumManager.view,-640,-360),new Entity(this.gl,0,NiobiumManager.view,-100,0)]));
+        NiobiumManager.currentScene = NiobiumManager.scenes[0];
     }
 
     public updateScreen(){
@@ -44,13 +40,13 @@ class Niobium{
 
         var gl = canvas.getContext("webgl2") as WebGL2RenderingContext;
         gl.viewport(0,0,window.innerWidth,window.innerHeight);
-        this.view.updateView(window.innerWidth,window.innerHeight);
+        NiobiumManager.view.updateView(window.innerWidth,window.innerHeight);
         //console.log("yes")
     }
 
     public run(){
-        this.keyboard.update(window);
-        this.mouse.update(this.canvas);
+        NiobiumManager.keyboard.update(window);
+        NiobiumManager.mouse.update(this.canvas);
         this.update(0);
     }
 
@@ -71,48 +67,39 @@ class Niobium{
         //}
         //this.mouse.screenToView(this.view).x(),this.mouse.screenToView(this.view).y()
         //console.log(`x: ${this.mouse.screenToView(this.view).x()} y: ${this.mouse.screenToView(this.view).y()}`);
-        if(this.keyboard.isKeyDown("w") == true){
-            this.entities[0].transform.addPosition(0,-100 * deltaTime);
+        if(NiobiumManager.keyboard.isKeyDown("w") == true){
+            NiobiumManager.currentScene.entities[0].transform.addPosition(0,-100 * deltaTime);
         }
-        if(this.keyboard.isKeyDown("a") == true){
-            this.entities[0].transform.addPosition(-100 * deltaTime,0);
+        if(NiobiumManager.keyboard.isKeyDown("a") == true){
+            NiobiumManager.currentScene.entities[0].transform.addPosition(-100 * deltaTime,0);
         }
-        if(this.keyboard.isKeyDown("s") == true){
-            this.entities[0].transform.addPosition(0,100 * deltaTime);
+        if(NiobiumManager.keyboard.isKeyDown("s") == true){
+            NiobiumManager.currentScene.entities[0].transform.addPosition(0,100 * deltaTime);
         }
-        if(this.keyboard.isKeyDown("d") == true){
-            this.entities[0].transform.addPosition(100 * deltaTime,0);
-        }
-
-        this.view.followEntity(this.entities[0])
-
-        if(this.keyboard.isKeyDown("l") == true){
-            this.view.pos.v[0] += -50 * deltaTime;
+        if(NiobiumManager.keyboard.isKeyDown("d") == true){
+            NiobiumManager.currentScene.entities[0].transform.addPosition(100 * deltaTime,0);
         }
 
-        if(this.keyboard.isKeyDown("j") == true){
-            this.view.pos.v[0] += 50 * deltaTime;
+        NiobiumManager.view.followEntity(NiobiumManager.currentScene.entities[0])
+
+        if(NiobiumManager.keyboard.isKeyDown("l") == true){
+            NiobiumManager.view.pos.v[0] += -50 * deltaTime;
         }
 
-        if(this.keyboard.isKeyDown("k") == true){
-            this.view.pos.v[1] += -50 * deltaTime;
+        if(NiobiumManager.keyboard.isKeyDown("j") == true){
+            NiobiumManager.view.pos.v[0] += 50 * deltaTime;
         }
 
-        if(this.keyboard.isKeyDown("i") == true){
-            this.view.pos.v[1] += 50 * deltaTime;
+        if(NiobiumManager.keyboard.isKeyDown("k") == true){
+            NiobiumManager.view.pos.v[1] += -50 * deltaTime;
         }
 
-        for(var i = 0; i < this.entities.length; i++){
-            if(Vector2f.distance(this.view.pos,this.entities[i].transform.position) < NioRenderer.POPIN_DISTANCE){
-                this.entities[i].draw();
-
-               
-            }
-            //this.entities[i].draw();
-           //this.entities[i].draw();
-            //if()
-            
+        if(NiobiumManager.keyboard.isKeyDown("i") == true){
+            NiobiumManager.view.pos.v[1] += 50 * deltaTime;
         }
+
+        NiobiumManager.currentScene.draw();
+        NiobiumManager.currentScene.update(deltaTime);
 
         fpselement.textContent = `FPS: ${1 / deltaTime}`
         this.prevTime = time;

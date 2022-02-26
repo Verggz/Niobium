@@ -2,7 +2,7 @@ import { VAO } from "../primitive/VAO";
 import { VBO } from "../primitive/VBO";
 import { View } from "../area/View";
 import { Shader } from "./Shader";
-import { Transform } from "../../model/Transform";
+import {TransformComponent } from "../../components/TransformComponent";
 import { Texture } from "./Texture";
 
 export class Model{
@@ -28,7 +28,7 @@ export class Model{
         this.vao.attachBuffer(this.texcoordsbuf,1,this.gl.FLOAT);
     }
 
-    public render(texture:Texture,transform:Transform,view:View,shader:Shader){
+    public render(texture:Texture,transform:TransformComponent,view:View,shader:Shader){
         this.vao.bind();
 
         shader.bind();

@@ -2,7 +2,7 @@ import { Matrix3f } from "../math/Matrix3f";
 import { Vector2f } from "../math/Vector2f";
 import { NioRenderer } from "../rendering/NioRenderer";
 
-export class Transform{
+export class TransformComponent{
     public position:Vector2f;
     public scale:Vector2f;
     public rotation:number;

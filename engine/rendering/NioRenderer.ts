@@ -1,7 +1,7 @@
 import { Model } from "./models/Model";
 import { Shader } from "./models/Shader";
 import { View } from "./area/View";
-import { Transform } from "../model/Transform";
+import { TransformComponent } from "../components/TransformComponent";
 import { Texture } from "./models/Texture";
 
 export class NioRenderer{
@@ -32,7 +32,7 @@ export class NioRenderer{
         this.shader = new Shader(this.gl,"./build/assets/shader.vsh","./build/assets/shader.fsh");
     }
 
-    public render(transform:Transform):void{
+    public render(transform:TransformComponent):void{
         this.model.render(this.texture,transform,this.view,this.shader);
     }
 }

@@ -7,8 +7,11 @@ class Texture {
         this.textureSource = source;
         this.texture = this.gl.createTexture();
         this.gl.bindTexture(this.gl.TEXTURE_2D, this.texture);
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255, 255]));
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 255, 0, 255]));
         this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+        if (source == "none") {
+            return;
+        }
         var image = new Image();
         var main = this;
         image.onload = function () {
